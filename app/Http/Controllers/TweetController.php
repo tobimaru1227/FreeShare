@@ -12,4 +12,13 @@ class TweetController extends Controller
         $tweets = Tweet::orderBy('created_at', 'desc')->get();
         return view('tweets.index', ['tweets' => $tweets]);
     }
+    
+    /**
+     * 投稿ページを表示
+     * @return view
+     */
+    public function create()
+    {
+        return view('tweets.create');
+    }
 }
