@@ -18,16 +18,16 @@
     }
             
 // 投稿の確認ダイアログ
-    function storeDialog() {
+    function storeDialog(event) {
+        event.preventDefault();
         if(window.confirm('投稿してもよろしいですか？')) {
             return true;
-        } else {
-            return false;
         }
     }
     
 // 更新の確認ダイアログ
-    function updateDialog() {
+    function updateDialog(event) {
+        event.preventDefault();
         if(window.confirm('更新してもよろしいですか？')) {
             return true;
         } else {
@@ -36,7 +36,8 @@
     }
 
 // 削除の確認ダイアログ
-    function deleteDialog() {
+    function deleteDialog(event) {
+        event.preventDefault();
         if(window.confirm('削除してもよろしいですか？')) {
             return true;
         } else {
