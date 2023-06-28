@@ -15,7 +15,12 @@ use App\Http\Controllers\TweetController;
 |
 */
 
+// トップページの表示
 Route::get('/', [TweetController::class, 'index'])->name('tweet.index');
+// 投稿画面の表示
+Route::get('/create', [TweetController::class, 'create'])->name('tweet.create');
+// 投稿データの登録
+Route::post('/store', [TweetController::class, 'store'])->name('tweet.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
