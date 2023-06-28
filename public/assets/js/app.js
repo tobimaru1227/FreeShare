@@ -21,7 +21,7 @@
     function storeDialog(event) {
         event.preventDefault();
         if(window.confirm('投稿してもよろしいですか？')) {
-            return true;
+            document.getElementById('tweet-from').submit();
         }
     }
     
@@ -29,9 +29,7 @@
     function updateDialog(event) {
         event.preventDefault();
         if(window.confirm('更新してもよろしいですか？')) {
-            return true;
-        } else {
-            return false;
+            document.getElementById('update-from').submit();
         }
     }
 
@@ -39,8 +37,6 @@
     function deleteDialog(event) {
         event.preventDefault();
         if(window.confirm('削除してもよろしいですか？')) {
-            return true;
-        } else {
-            return false;
+            document.getElementById('delete-from').submit();
         }
     }

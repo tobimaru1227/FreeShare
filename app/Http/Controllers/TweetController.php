@@ -21,4 +21,27 @@ class TweetController extends Controller
     {
         return view('tweets.create');
     }
+    
+    /**
+     * 投稿データを登録
+     * @return redirect
+     */
+    public function store(Request $request)
+    {
+        $inputs = $request->all();
+        
+        // 画像があった場合の処理
+        if($file = $request->image) {
+            $fileName = date('Ymd_His').'_'. $file->getClientOriginalName(); // ファイルのオリジナルネーム取得
+            $target_path = public_path('storage/');
+            $file->move($target_path, $fileName);
+            $inputs = $request->except(['image']); // 'image'キーを一度除外する
+            $inputs['image'] = $fileName; // 'image'キーにファイル名を追加する
+        }
+        
+        Tweet::create($inputs);
+        
+        session()->flash('message', '新しい投稿ができました。');
+        return redirect()->route('tweet.index');
+    }
 }

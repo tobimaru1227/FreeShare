@@ -2,6 +2,13 @@
     
     <x-slot name=header>Home</x-slot>
     
+    <!-- フラッシュメッセージ -->
+    @if(session('message'))
+        <div class="flash-message">
+            {{ session('message') }}
+        </div>
+    @endif
+    
     <div class="tweet">
         <!-- 投稿データ一覧 -->
         @foreach ($tweets as $tweet)
