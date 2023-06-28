@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
+use Illuminate\Support\Facades\Log;
 
 class TweetController extends Controller
 {
@@ -29,20 +30,28 @@ class TweetController extends Controller
      */
     public function store(TweetRequest $request)
     {
-        $inputs = $request->all();
-        
-        // 画像があった場合の処理
-        if($file = $request->image) {
-            $fileName = date('Ymd_His').'_'. $file->getClientOriginalName(); // ファイルのオリジナルネーム取得
-            $target_path = public_path('storage/');
-            $file->move($target_path, $fileName);
-            $inputs = $request->except(['image']); // 'image'キーを一度除外する
-            $inputs['image'] = $fileName; // 'image'キーにファイル名を追加する
+        try {
+            $inputs = $request->all();
+            
+            // 画像があった場合の処理
+            if($file = $request->image) {
+                $fileName = date('Ymd_His').'_'. $file->getClientOriginalName();
+                $target_path = public_path('storage/');
+                $file->move($target_path, $fileName);
+                $inputs = $request->except(['image']); // 'image'キーを一度除外する
+                $inputs['image'] = $fileName; // 'image'キーにファイル名を追加する
+            }
+            
+            Tweet::create($inputs);
+            
+            session()->flash('message', '新しい投稿ができました。');
+            return redirect()->route('tweet.index');
+            
+        } catch (\Exception $e) {
+            // 例外が発生した場合の処理
+            Log::error($e); // ログに残す
+            session()->flash('message', '投稿の保存中にエラーが発生しました。');
+            return back()->withInput();
         }
-        
-        Tweet::create($inputs);
-        
-        session()->flash('message', '新しい投稿ができました。');
-        return redirect()->route('tweet.index');
     }
 }
