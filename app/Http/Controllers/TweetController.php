@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
 
 class TweetController extends Controller
@@ -26,7 +27,7 @@ class TweetController extends Controller
      * 投稿データを登録
      * @return redirect
      */
-    public function store(Request $request)
+    public function store(TweetRequest $request)
     {
         $inputs = $request->all();
         
