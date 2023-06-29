@@ -38,7 +38,7 @@
             <x-primary-button><img src="{{ asset('images/good_icon.png') }}" alt="いいね"></x-primary-button>
             <x-primary-button><img src="{{ asset('images/share_icon.png') }}" alt="リツイート"></x-primary-button>
             
-            {{-- <div class="tweet_menu">
+            <div class="tweet_menu">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button>
@@ -46,12 +46,14 @@
                         </button>
                     </x-slot>
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('tweet.show', $tweet->id)">
-                            {{ __('詳細') }}
-                        </x-dropdown-link>
+                        @if (Auth::id() === $tweet->user_id)
+                            <x-dropdown-link :href="route('tweet.edit', $tweet->id)">
+                                {{ __('編集') }}
+                            </x-dropdown-link>
+                        @endif
                     </x-slot>
                 </x-dropdown>
-            </div> --}}
+            </div>
         </div>
     </div>
 
