@@ -54,4 +54,15 @@ class TweetController extends Controller
             return back()->withInput();
         }
     }
+    
+    /**
+     * 投稿詳細ページを表示
+     * @param int $id
+     * @return view
+     */
+    public function show(int $id)
+    {
+        $tweet = Tweet::find($id);
+        return view('tweets.show', ['tweet' => $tweet]);
+    }
 }
