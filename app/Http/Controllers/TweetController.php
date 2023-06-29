@@ -65,4 +65,15 @@ class TweetController extends Controller
         $tweet = Tweet::find($id);
         return view('tweets.show', ['tweet' => $tweet]);
     }
+    
+    /**
+     * 編集ページを表示
+     * @param int $id
+     * @return view
+     */
+    public function edit(int $id)
+    {
+        $tweet = Tweet::find($id);
+        return view('tweets.edit', ['tweet' => $tweet]);
+    }
 }
