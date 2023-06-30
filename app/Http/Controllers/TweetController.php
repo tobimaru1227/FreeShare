@@ -7,6 +7,7 @@ use App\Http\Requests\TweetRequest;
 use App\Http\Requests\TweetUpdateRequest;
 use App\Models\Tweet;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class TweetController extends Controller
 {
@@ -75,6 +76,11 @@ class TweetController extends Controller
     public function edit(int $id)
     {
         $tweet = Tweet::find($id);
+        // 直打ち対策
+        if(Auth::id() != $tweet->user_id) {
+            return redirect()->route('tweet.index');
+        }
+        
         return view('tweets.edit', ['tweet' => $tweet]);
     }
     
