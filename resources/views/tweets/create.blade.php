@@ -4,7 +4,7 @@
     
     <x-slot name=header>投稿</x-slot>
     
-    <form id="tweet-from" method="POST" action="{{ route('tweet.store') }}" enctype="multipart/form-data">
+    <form id="tweet-form" method="POST" action="{{ route('tweet.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="form-item">
