@@ -27,6 +27,8 @@ Route::get('/show/{id}', [TweetController::class, 'show'])->name('tweet.show');
 Route::get('/edit/{id}', [TweetController::class, 'edit'])->name('tweet.edit');
 // 編集内容の登録
 Route::post('/update', [TweetController::class, 'update'])->name('tweet.update');
+// 投稿データの削除
+Route::post('/destroy/{id}', [TweetController::class, 'destroy'])->name('tweet.destroy');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
