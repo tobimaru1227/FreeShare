@@ -120,4 +120,25 @@ class TweetController extends Controller
             return back()->withInput();
         }
     }
+    
+    /**
+     * 投稿データの削除
+     * @param int $id
+     * @return view
+     */
+    public function destroy(int $id)
+    {
+        try {
+            Tweet::destroy($id);
+            
+            session()->flash('message', 'データを削除しました。');
+            return redirect(route('tweet.index'));
+            
+        } catch(\Throwable $e) {
+            // 例外処理
+            Log::error($e);
+            session()->flash('message', 'エラーが発生し、データを削除できませんでした。');
+            return back()->withInput();
+        }
+    }
 }

@@ -42,6 +42,12 @@
                                 <x-dropdown-link :href="route('tweet.edit', $tweet->id)">
                                     {{ __('編集') }}
                                 </x-dropdown-link>
+                                <form id="delete-form" method="POST" action="{{ route('tweet.destroy', $tweet->id) }}">
+                                    @csrf
+                                    <x-dropdown-link onclick="deleteDialog(event)" style="cursor: pointer">
+                                        {{ __('削除') }}
+                                    </x-dropdown-link>
+                                </form>
                             @endif
                         </x-slot>
                     </x-dropdown>
